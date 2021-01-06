@@ -1,51 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <!-- Bootstrap -->
-    <link 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
-      rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
-      crossorigin="anonymous"
-    />
-    
-    <!-- Font Awesome for Icons -->
-    <script src="https://kit.fontawesome.com/a7978ebb6a.js" crossorigin="anonymous"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link rel="stylesheet" href="style.css" />
-    <title>Weather Dashboard</title>
-  </head>
-  <body>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
 
-    <div>
-        <!-- Weather Dashboard Ribbon -->
-        <span class="fas fa-camera"></span>
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/a7978ebb6a.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <title>Weather Dashboard</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid text-align-center">
+      <h1 class="navbar-text">
+        Weather Dashboard
+      </h1>>
     </div>
+  </nav>
 
-    <!--Contains the rest of the page  -->
-    <div class="container">
-        <div class="col-3">
-            <!-- Search for a city and saved city searches area -->
+  <!--Contains the rest of the page  -->
+  <div class="container">
+    <!-- Input form and recently viewed city list area -->
+    <div class="row">
+
+      <div class="col-3">
+
+        <!-- Input form area -->
+        <div class="row">
+          <form class="mb-3">
+            <label for="city-input" class="form-label">Seach for a City:</label>
+            <input type="text" class="form-control" id="city-input">
+            <button type="submit" class="btn btn-primary"><span class="fas fa-search"></span></button>
+          </form>
         </div>
 
-        <div class="col-9">
-            <!-- Specific city weather and five day forecast areas -->
-            <div class="row">
-                <!-- City specific weather data -->
-            </div>
-
-            <div class="row">
-                <!-- Five day forecast area -->
-            </div>
+        <!-- Recently viewed city list area -->
+        <div class="row">
+          <ul class="list-group" id="city-list">
+            <!-- Append cities here dynamically -->
+          </ul>
         </div>
+
+      </div>
+
+      <div class="col-9">
+        <!-- Specific city weather and five day forecast areas -->
+        <div class="row" id="city-weather-area">
+
+          <!-- City specific weather data -->
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title" id="city-name">Some City:</h5>
+              <p class="card-text" id="temperature">Temperature:</p>
+              <p class="card-text" id="humidity">Humidity:</p>
+              <p class="card-text" id="windSpeed">Wind Speed:</p>
+              <p class="card-text" id="uvIndex">UV Index:</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="forecast-area">
+          <div class="row">
+            <h5 class="card-title">5-Day Forecast:</h5>
+
+          </div>
+          <!-- Five day forecast area -->
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h6 class="card-title">1/5/2021</h6>
+              <icon id="forecast-icon"><i class="fas fa-sun"></i></icon>
+              
+              <p class="card-text">Temp:</p>
+              <p class="card-text">Humidity:</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+  </div>
 
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+
 </html>

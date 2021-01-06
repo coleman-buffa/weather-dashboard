@@ -4,7 +4,8 @@ $(document).ready(function() {
     
     
     var cityList = [];
-    //Captures the user's entered city and stores in an array for later use    
+    //Captures the user's entered city and stores in an array
+    //Wish list: add local storage functionality    
     $("#city-button").on("click", function(event) {
         event.preventDefault();
 
@@ -30,10 +31,12 @@ $(document).ready(function() {
         }
     }
 
+    //Click any of the City list items will populate that city's weather data
     $(document).on("click", ".city-li", function () {
         var APIKey = "c8cbf2d95a5dea77ab7ea30913acbe6d";
         var city = $(this).attr("data-name");
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + 
+                        "&units=imperial&appid=" + APIKey;
 
         $.ajax ({
             url: queryURL,
@@ -41,22 +44,40 @@ $(document).ready(function() {
         }).then(function(response) {
             console.log(response);
 
-            //need image source url
             var iconCode = response.weather[0].icon;
-            var iconURL = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+            var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
             var img = $("<img>");
             img.attr("src", iconURL);
 
             $("#city-name").text(response.name);
             $("#city-name").append(img);
-            $("#temperature").text("Temperature: " + response.main.temp);
-            $("#humidity").text("Humidity: " + response.main.humidity);
-            $("#windSpeed").text("Wind speed: " + response.wind.speed);
+            $("#temperature").text("Temperature: " + response.main.temp + "\xB0" + "F");
+            $("#humidity").text("Humidity: " + response.main.humidity + "%");
+            $("#windSpeed").text("Wind speed: " + response.wind.speed + "MPH");
             
-
+            writeUV(response);
         });
 
     });
+
+    //Writes UV index data to the page by accepting the request initiated by clicking on a city item
+    function writeUV(promise) {
+        var lat = promise.coord.lat;
+        var lon = promise.coord.lon;
+
+        var APIKey = "c8cbf2d95a5dea77ab7ea30913acbe6d";
+        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + 
+                        lon + "&exclude=alerts&appid=" + APIKey;
+
+        $.ajax ({
+            url:queryURL,
+            method: "GET"
+        }).then(function(response) {
+            var uvIndex = response.current.uvi;
+            $("#uvIndex").text("UV Index: " + uvIndex);
+        });
+
+    }
 
    
 });

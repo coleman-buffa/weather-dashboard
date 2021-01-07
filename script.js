@@ -1,9 +1,16 @@
 // Wait for the page to load before doing anything
 $(document).ready(function() {
-    //All JS goes inside here
-    
     
     var cityList = [];
+    retrieveCityList();
+
+    //Retrieve list of cities from local storage and assign to global variable
+    //for function accessibility
+    function retrieveCityList() {
+        cityList = localStorage.getItem("history") === null ? [] : JSON.parse(localStorage.getItem("history"));
+        renderCityList();
+    }
+
     //Captures the user's entered city and stores in an array
     //Wish list: add local storage functionality    
     $("#city-button").on("click", function(event) {
@@ -14,7 +21,7 @@ $(document).ready(function() {
 
         $("#city-input").val("");
 
-        
+        localStorage.setItem("history", JSON.stringify(cityList));
         renderCityList();
     });
 

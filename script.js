@@ -14,6 +14,7 @@ $(document).ready(function() {
 
         $("#city-input").val("");
 
+        
         renderCityList();
     });
 
@@ -31,18 +32,18 @@ $(document).ready(function() {
         }
     }
 
-    //Click any of the City list items will populate that city's weather data
+    //Click any of the City list items will populate that city's weather data and 
+    //five day forecast
     $(document).on("click", ".city-li", function () {
         var APIKey = "c8cbf2d95a5dea77ab7ea30913acbe6d";
         var city = $(this).attr("data-name");
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + 
-                        "&units=imperial&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city 
+            + "&units=imperial&appid=" + APIKey;
 
         $.ajax ({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-            console.log(response);
 
             var iconCode = response.weather[0].icon;
             var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
@@ -65,9 +66,10 @@ $(document).ready(function() {
         var lat = promise.coord.lat;
         var lon = promise.coord.lon;
 
+        writeForecast(lat, lon);
+
         var APIKey = "c8cbf2d95a5dea77ab7ea30913acbe6d";
-        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + 
-                        lon + "&exclude=alerts&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=alerts&appid=" + APIKey;
 
         $.ajax ({
             url:queryURL,
@@ -75,8 +77,65 @@ $(document).ready(function() {
         }).then(function(response) {
             var uvIndex = response.current.uvi;
             $("#uvIndex").text("UV Index: " + uvIndex);
-        });
+        });       
+    }
 
+    //Gets and writes forecast data to the page
+    function writeForecast (lat, lon) {
+        var APIKey = "c8cbf2d95a5dea77ab7ea30913acbe6d";
+        var forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat
+             + "&lon=" + lon + "&units=imperial&appid=" + APIKey;
+        
+        $.ajax ({
+            url:forecastURL,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
+
+            $("#card-area").empty();
+
+            //Add five days of forecasted data
+            for (var i = 0; i < 5; i++){
+                var newCardDiv = $("<div>");
+                newCardDiv.addClass("card");
+    
+                var newCardBody = $("<div>");
+                newCardBody.addClass("card-body");
+    
+                //Date
+                var forecastDate = response.daily[i].dt;
+                var newCardTitle = $("<h6>");
+                newCardTitle.addClass("card-title");
+                newCardTitle.text(forecastDate);
+    
+                //Icon
+                var iconCode = response.daily[i].weather[0].icon;
+                var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+                var newCardIcon = $("<img>");
+                newCardIcon.attr("src", iconURL);
+    
+                //Temperature
+                var forecastTemp = response.daily[i].temp.day;
+                var newCardTemp = $("<p>");
+                newCardTemp.addClass("card-text");                
+                newCardTemp.text("Temp: " + forecastTemp + "\xB0" + "F")
+    
+                //Humidity
+                var forecastHumidity = response.daily[i].humidity;
+                var newCardHumidity = $("<p>");
+                newCardHumidity.addClass("card-text");
+                newCardHumidity.text("Humidity: " + forecastHumidity + "%");
+
+                newCardBody.append(newCardTitle);
+                newCardBody.append(newCardIcon);
+                newCardBody.append(newCardTemp);
+                newCardBody.append(newCardHumidity);
+                newCardDiv.append(newCardBody);
+
+                $("#card-area").append(newCardDiv);
+
+            }
+        });
     }
 
    

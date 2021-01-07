@@ -23,6 +23,7 @@ $(document).ready(function() {
 
         localStorage.setItem("history", JSON.stringify(cityList));
         renderCityList();
+        assignWeatherData(city);
     });
 
     //Renders the city list using entries in cityList array
@@ -39,11 +40,22 @@ $(document).ready(function() {
         }
     }
 
-    //Click any of the City list items will populate that city's weather data and 
-    //five day forecast
+    //Returns the time formatted MM/DD/YYYY given a UTC timestamp
+    function renderTime(UTC) {
+        var date = moment.unix(UTC).format("MM/DD/YYYY");
+        return date;
+    }
+
+    //Click any of the City list items will call a series of functions that
+    //will populate the page with weather data
     $(document).on("click", ".city-li", function () {
-        var APIKey = "c8cbf2d95a5dea77ab7ea30913acbe6d";
         var city = $(this).attr("data-name");
+        assignWeatherData(city);
+    });
+    
+    //Write weather data to the page
+    function assignWeatherData (city) {
+        var APIKey = "c8cbf2d95a5dea77ab7ea30913acbe6d";
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city 
             + "&units=imperial&appid=" + APIKey;
 
@@ -51,22 +63,24 @@ $(document).ready(function() {
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-
+            console.log(response);
+            
             var iconCode = response.weather[0].icon;
             var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
             var img = $("<img>");
             img.attr("src", iconURL);
 
-            $("#city-name").text(response.name);
+            var date = renderTime(response.dt);
+
+            $("#city-name").text(response.name + " (" + date + ") ");
             $("#city-name").append(img);
             $("#temperature").text("Temperature: " + response.main.temp + "\xB0" + "F");
             $("#humidity").text("Humidity: " + response.main.humidity + "%");
-            $("#windSpeed").text("Wind speed: " + response.wind.speed + "MPH");
+            $("#windSpeed").text("Wind speed: " + response.wind.speed + " MPH");
             
             writeUV(response);
         });
-
-    });
+    }
 
     //Writes UV index data to the page by accepting the request initiated by clicking on a city item
     function writeUV(promise) {
@@ -110,7 +124,7 @@ $(document).ready(function() {
                 newCardBody.addClass("card-body");
     
                 //Date
-                var forecastDate = response.daily[i].dt;
+                var forecastDate = renderTime(response.daily[i].dt);
                 var newCardTitle = $("<h6>");
                 newCardTitle.addClass("card-title");
                 newCardTitle.text(forecastDate);

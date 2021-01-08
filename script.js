@@ -1,4 +1,4 @@
-// Wait for the page to load before doing anything
+// Wait for the page to load before doing anything else
 $(document).ready(function() {
     
     var cityList = [];
@@ -21,6 +21,10 @@ $(document).ready(function() {
 
         $("#city-input").val("");
 
+        if (cityList.length >=7) {
+            cityList.shift();
+            renderCityList();
+        }
         localStorage.setItem("history", JSON.stringify(cityList));
         renderCityList();
         assignWeatherData(city);
@@ -62,9 +66,7 @@ $(document).ready(function() {
         $.ajax ({
             url: queryURL,
             method: "GET"
-        }).then(function(response) {
-            console.log(response);
-            
+        }).then(function(response) {            
             var iconCode = response.weather[0].icon;
             var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
             var img = $("<img>");
@@ -97,7 +99,16 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response) {
             var uvIndex = response.current.uvi;
-            $("#uvIndex").text("UV Index: " + uvIndex);
+            $("#uvIndex").text("UV Index: ");
+            var uvSpan = $("<span>").text(uvIndex);          
+            if (uvIndex <= 2) {
+                uvSpan.addClass("bg-success text-white");
+            } else if (uvIndex > 2 && uvIndex <= 7) {
+                uvSpan.addClass("bg-warning text-white");
+            } else {
+                uvSpan.addClass("bg-danger text-white");
+            }
+            $("#uvIndex").append(uvSpan)
         });       
     }
 
@@ -111,14 +122,13 @@ $(document).ready(function() {
             url:forecastURL,
             method: "GET"
         }).then(function(response) {
-            console.log(response);
 
             $("#card-area").empty();
 
-            //Add five days of forecasted data
-            for (var i = 0; i < 5; i++){
+            //Add five days of forecasted data ignoring today's data
+            for (var i = 1; i < 6; i++){
                 var newCardDiv = $("<div>");
-                newCardDiv.addClass("card");
+                newCardDiv.addClass("card forecast-card bg-primary m-1");
     
                 var newCardBody = $("<div>");
                 newCardBody.addClass("card-body");
@@ -128,36 +138,32 @@ $(document).ready(function() {
                 var newCardTitle = $("<h6>");
                 newCardTitle.addClass("card-title");
                 newCardTitle.text(forecastDate);
+                newCardBody.append(newCardTitle);
     
                 //Icon
                 var iconCode = response.daily[i].weather[0].icon;
                 var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
                 var newCardIcon = $("<img>");
                 newCardIcon.attr("src", iconURL);
+                newCardBody.append(newCardIcon);
     
                 //Temperature
                 var forecastTemp = response.daily[i].temp.day;
                 var newCardTemp = $("<p>");
                 newCardTemp.addClass("card-text");                
-                newCardTemp.text("Temp: " + forecastTemp + "\xB0" + "F")
+                newCardTemp.text("Temp: " + forecastTemp + "\xB0" + "F");
+                newCardBody.append(newCardTemp);
     
                 //Humidity
                 var forecastHumidity = response.daily[i].humidity;
                 var newCardHumidity = $("<p>");
                 newCardHumidity.addClass("card-text");
                 newCardHumidity.text("Humidity: " + forecastHumidity + "%");
-
-                newCardBody.append(newCardTitle);
-                newCardBody.append(newCardIcon);
-                newCardBody.append(newCardTemp);
                 newCardBody.append(newCardHumidity);
+
                 newCardDiv.append(newCardBody);
-
                 $("#card-area").append(newCardDiv);
-
             }
         });
-    }
-
-   
+    }   
 });

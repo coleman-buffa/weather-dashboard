@@ -17,11 +17,10 @@
 
   <title>Weather Dashboard</title>
 </head>
-
 <body>
 
-  <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid text-align-center">
+  <nav class="navbar navbar-dark bg-dark align-items-center">
+    <div class="container align-tems-center">
       <h1 class="navbar-text">
         Weather Dashboard
       </h1>>
@@ -33,7 +32,7 @@
     <!-- Input form and recently viewed city list area -->
     <div class="row">
 
-      <div class="col-3">
+      <div class="col-2">
 
         <!-- Input form area -->
         <div class="row">
@@ -53,7 +52,7 @@
 
       </div>
 
-      <div class="col-9">
+      <div class="col-10">
         <!-- Specific city weather and five day forecast areas -->
         <div class="row" id="city-weather-area">
 
@@ -74,7 +73,7 @@
             <h5 class="card-title">5-Day Forecast:</h5>
           </div>
 
-          <div id="card-area">
+          <div id="card-area" class="row">
             <!-- Append forecast cards here -->
           </div>
         </div>
@@ -91,5 +90,4 @@
   <script src="script.js"></script>
 
 </body>
-
 </html>

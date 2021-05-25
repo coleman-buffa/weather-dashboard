@@ -3,6 +3,7 @@ import TopBar from './components/topbar';
 import SearchBar from './components/searchbar';
 import CityList from './components/citylist';
 import CurrentWeather from './components/currentweather';
+import ForecastWeather from './components/forecastweather';
 import { Container, Grid } from "@material-ui/core";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           </Grid>
           <Grid item xs={12} sm={8}>
             <CurrentWeather />
+            <ForecastWeather />
           </Grid>
         </Grid>
       </Container>

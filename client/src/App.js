@@ -1,6 +1,7 @@
 import './App.css';
-import TopBar from './components/topbar/topbar.js';
-import { Container, Grid} from "@material-ui/core";
+import TopBar from './components/topbar/topbar';
+import SearchBar from './components/searchbar/searchbar';
+import { Container, Grid, Paper } from "@material-ui/core";
 
 function App() {
   return (
@@ -8,11 +9,11 @@ function App() {
       <TopBar />
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
-            Hello World!
+          <Grid item xs={12} sm={4}>
+            <SearchBar/>
           </Grid>
-          <Grid item xs={12} md={8}>
-            Hello World!
+          <Grid item xs={12} sm={8}>
+            <Paper>Hello World</Paper>
           </Grid>
         </Grid>
       </Container>

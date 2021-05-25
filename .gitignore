@@ -1,5 +1,4 @@
 .env
-old/
 .DS_STORE
 references/
 node_modules

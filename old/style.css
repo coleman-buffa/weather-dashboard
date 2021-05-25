@@ -1,0 +1,10 @@
+/* Page Styling */
+
+.city-li {
+    cursor: pointer;
+}
+
+.forecast-card {
+    width: 9rem;
+    text-align: center;
+}

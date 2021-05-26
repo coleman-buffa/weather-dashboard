@@ -21,10 +21,9 @@ export default function CityList() {
       <ButtonGroup
         orientation='vertical'
         color='primary'
-        aria-label='vertical contained primary button group'
-        variant='text'
+        aria-label='vertical outlined primary button group'
       >
-        <Button>London</Button>
+        <Button variant="contained">London</Button>
         <Button>Berlin</Button>
         <Button>San Francisco</Button>
         <Button>New York</Button>

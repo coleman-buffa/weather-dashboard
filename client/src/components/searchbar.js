@@ -11,13 +11,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar(props) {
 
   const classes = useStyles();
 
   return (
-    <form className={classes.root}>
-      <TextField id="filled-basic" label="City Search" varient="filled" />
+    <form className={classes.root} onSubmit={props.handleInputChange}>
+      <TextField
+        id="standard-search"
+        label="City Search"
+        varient="filled"
+        type="search"
+        inputRef={props.inputRef}
+      />
     </form>
   )
 }

@@ -10,16 +10,26 @@ import { Container, Grid } from "@material-ui/core";
 function App() {
 
   const [city, setCity] = useState("");
-  const [cityList, setCityList] = useState(["London", "Berlin", "San Francisco", "New York"]);
+  const [cityList, setCityList] = useState([]);
   const inputRef = useRef("");
 
   useEffect(() => {
     console.log(city);
 }, [city]);
 
+useEffect(() => {
+  console.log(`${cityList} is type ${typeof(cityList)}`);
+}, [cityList]);
+
   const handleSubmit = event => {
     event.preventDefault();
-    setCity(inputRef.current.value);
+    let searchTerm = inputRef.current.value;
+    setCity(searchTerm);
+    console.log(`${searchTerm} is type ${typeof(searchTerm)}`);
+    if (cityList.indexOf(searchTerm) < 0) {
+      setCityList([searchTerm, ...cityList]);
+    }
+
   }
 
   const handleClick = event => {

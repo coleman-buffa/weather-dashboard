@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import {useLocalStorage} from './hooks/useLocalStorage';
 import './App.css';
 import TopBar from './components/topbar';
 import SearchBar from './components/searchbar';
@@ -10,7 +11,7 @@ import { Container, Grid } from "@material-ui/core";
 function App() {
 
   const [city, setCity] = useState("");
-  const [cityList, setCityList] = useState([]);
+  const [cityList, setCityList] = useLocalStorage('cityList', []);
   const inputRef = useRef("");
 
   useEffect(() => {

@@ -10,17 +10,15 @@ import { Container, Grid } from "@material-ui/core";
 
 function App() {
 
-  const [city, setCity] = useState("");
   const [cityList, setCityList] = useLocalStorage('cityList', []);
+  const [city, setCity] = useState(cityList[0] ? cityList[0] : "");
   const inputRef = useRef("");
 
   useEffect(() => {
     console.log(city);
+    // Fetch current weather
+    // Fetch forecast weather
 }, [city]);
-
-useEffect(() => {
-  console.log(`${cityList} is type ${typeof(cityList)}`);
-}, [cityList]);
 
   const handleSubmit = event => {
     event.preventDefault();

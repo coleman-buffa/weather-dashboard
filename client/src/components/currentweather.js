@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CurrentWeather() {
+export default function CurrentWeather(props) {
 
   const classes = useStyles();
 
   return (
     <div>
       <Paper className={classes.root}>
-        <Typography>Current Weather in London:</Typography>
+        <Typography>Current Weather in {props.city}:</Typography>
         <Typography variant="caption">Temperature:</Typography>
         <Typography variant="caption">Humidity:</Typography>
         <Typography variant="caption">Wind Speed:</Typography>

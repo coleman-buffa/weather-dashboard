@@ -41,11 +41,12 @@ function App() {
               handleClick={handleClick}
               cityList={cityList}
               city={city}
-
             />
           </Grid>
           <Grid item xs={12} sm={8}>
-            <CurrentWeather />
+            <CurrentWeather 
+              city={city}
+            />
             <ForecastWeather />
           </Grid>
         </Grid>

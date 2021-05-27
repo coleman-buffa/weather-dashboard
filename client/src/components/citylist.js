@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CityList() {
+export default function CityList(props) {
 
   const classes = useStyles();
 
@@ -23,10 +23,20 @@ export default function CityList() {
         color='primary'
         aria-label='vertical outlined primary button group'
       >
-        <Button variant="contained">London</Button>
-        <Button>Berlin</Button>
-        <Button>San Francisco</Button>
-        <Button>New York</Button>
+        {props.cityList.map((item) => (
+          <Button 
+            key={item}
+            onClick={props.handleClick}            
+          
+          >
+            {item}
+          </Button>
+        ))}
+
+        {/* // <Button variant="contained">London</Button>
+        // <Button>Berlin</Button>
+        // <Button>San Francisco</Button>
+        // <Button>New York</Button> */}
       </ButtonGroup>
 
     </div>

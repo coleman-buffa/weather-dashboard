@@ -18,17 +18,17 @@ export default function SearchBar(props) {
   const classes = useStyles();
 
   return (
-    <form className={classes.root} onSubmit={props.handleInputChange}>
+    <form className={classes.root} onSubmit={props.handleSubmit}>
       <TextField
         id="standard-search"
         label="City Search"
-        varient="filled"
+        variant="filled"
         type="search"
         inputRef={props.inputRef}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={props.handleInputChange}>
+              <IconButton onClick={props.handleSubmit}>
                 <SearchIcon />
               </IconButton>
             </InputAdornment>

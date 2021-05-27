@@ -10,16 +10,21 @@ import { Container, Grid } from "@material-ui/core";
 function App() {
 
   const [city, setCity] = useState("");
-  const [cityList, setCityList] = useState([]);
+  const [cityList, setCityList] = useState(["London", "Berlin", "San Francisco", "New York"]);
   const inputRef = useRef("");
 
   useEffect(() => {
     console.log(city);
 }, [city]);
 
-  const handleInputChange = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     setCity(inputRef.current.value);
+  }
+
+  const handleClick = event => {
+    event.preventDefault();
+    setCity(event.target.firstChild.textContent);
   }
 
   return (
@@ -29,10 +34,15 @@ function App() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <SearchBar 
-              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
               inputRef={inputRef}
             />
-            <CityList />
+            <CityList 
+              handleClick={handleClick}
+              cityList={cityList}
+              city={city}
+
+            />
           </Grid>
           <Grid item xs={12} sm={8}>
             <CurrentWeather />

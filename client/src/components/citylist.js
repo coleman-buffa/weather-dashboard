@@ -26,17 +26,13 @@ export default function CityList(props) {
         {props.cityList.map((item) => (
           <Button 
             key={item}
-            onClick={props.handleClick}            
+            onClick={props.handleClick}
+            variant={item === props.city ? "contained" : "outlined"}            
           
           >
             {item}
           </Button>
         ))}
-
-        {/* // <Button variant="contained">London</Button>
-        // <Button>Berlin</Button>
-        // <Button>San Francisco</Button>
-        // <Button>New York</Button> */}
       </ButtonGroup>
 
     </div>

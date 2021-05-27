@@ -29,6 +29,7 @@ useEffect(() => {
     if (cityList.indexOf(searchTerm) < 0) {
       setCityList([searchTerm, ...cityList]);
     }
+    inputRef.current.value = "";
 
   }
 

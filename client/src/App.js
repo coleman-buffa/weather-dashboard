@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import {useLocalStorage} from './hooks/useLocalStorage';
+import React, { useState, useRef } from 'react';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import './App.css';
 import TopBar from './components/topbar';
 import SearchBar from './components/searchbar';
@@ -14,22 +14,14 @@ function App() {
   const [city, setCity] = useState(cityList[0] ? cityList[0] : "");
   const inputRef = useRef("");
 
-  useEffect(() => {
-    console.log(city);
-    // Fetch current weather
-    // Fetch forecast weather
-}, [city]);
-
   const handleSubmit = event => {
     event.preventDefault();
     let searchTerm = inputRef.current.value;
     setCity(searchTerm);
-    console.log(`${searchTerm} is type ${typeof(searchTerm)}`);
     if (cityList.indexOf(searchTerm) < 0) {
       setCityList([searchTerm, ...cityList]);
     }
     inputRef.current.value = "";
-
   }
 
   const handleClick = event => {
@@ -43,21 +35,23 @@ function App() {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
-            <SearchBar 
+            <SearchBar
               handleSubmit={handleSubmit}
               inputRef={inputRef}
             />
-            <CityList 
+            <CityList
               handleClick={handleClick}
               cityList={cityList}
               city={city}
             />
           </Grid>
           <Grid item xs={12} sm={8}>
-            <CurrentWeather 
+            <CurrentWeather
               city={city}
             />
-            <ForecastWeather />
+            <ForecastWeather
+              city={city}
+            />
           </Grid>
         </Grid>
       </Container>

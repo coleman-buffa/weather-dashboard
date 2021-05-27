@@ -1,6 +1,7 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import {Paper, Card, CardContent, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import API from '../utils/API';
+import { makeStyles } from '@material-ui/core/styles';
+import { Paper, Card, CardContent, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -18,8 +19,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ForecastWeather() {
+export default function ForecastWeather(props) {
+
   const classes = useStyles();
+  useEffect(() => {
+    loadForecast(props.city);
+  }, [props.city]);
+
+  const loadForecast = city => {
+    console.log(API.getForecastWeather(city));
+  }
 
   return (
     <Paper className={classes.cardContainer}>
@@ -103,7 +112,7 @@ export default function ForecastWeather() {
           </Typography>
         </CardContent>
       </Card>
-     
+
     </Paper>
 
   )

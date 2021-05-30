@@ -17,7 +17,7 @@ router.get("/weather/:city", (req, res) => {
     .then(response => {
       let lat = response.data.coord.lat;
       let lon = response.data.coord.lon;
-      URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${API_KEY}`;
+      URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly&appid=${API_KEY}`;
       axios({
         method: 'GET',
         url: URL

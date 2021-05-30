@@ -13,6 +13,8 @@ function App() {
 
   const [cityList, setCityList] = useLocalStorage('cityList', []);
   const [city, setCity] = useState(cityList[0] ? cityList[0] : "");
+  const [weather, setWeather] = useState({});
+  const [forecast, setForecast] = useState([]);
   const inputRef = useRef("");
 
   useEffect(() => {
@@ -21,7 +23,13 @@ function App() {
 
   const loadWeather = async city => {
     let data = await API.getWeather(city);
-    console.log(data);  
+    console.log(data);
+    setWeather(data.data.current);
+    let forecast = [];
+    for (let i = 1; i < 6; i++){
+      forecast.push(data.data.daily[i]);
+    }
+    setForecast(forecast);    
   }
 
   const handleSubmit = event => {
@@ -57,10 +65,10 @@ function App() {
           </Grid>
           <Grid item xs={12} sm={8}>
             <CurrentWeather
-              city={city}
+              weather={weather}
             />
             <ForecastWeather
-              city={city}
+              forecast={forecast}
             />
           </Grid>
         </Grid>

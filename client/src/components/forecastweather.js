@@ -18,93 +18,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ForecastWeather(props) {
+export default function ForecastWeather({ forecast }) {
 
-  const classes = useStyles(); 
+  const classes = useStyles();
 
   return (
     <Paper className={classes.cardContainer}>
-      <Card variant="outlined" className={classes.card}>
-        <CardContent>
-          <Typography>
-            DATE
+      {forecast.map((item) => (
+        <Card variant="outlined" className={classes.card}>
+          <CardContent>
+            <Typography>
+              {item.dt}
+            </Typography>
+            <Typography>
+              {item.temp.max}
+            </Typography>
+            <Typography>
+              {item.temp.min}
           </Typography>
-          <Typography>
-            THING
+            <Typography>
+              {item.weather[0].description}
           </Typography>
-          <Typography>
-            WEATHER
-          </Typography>
-          <Typography>
-            WOW
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card variant="outlined" className={classes.card}>
-        <CardContent>
-          <Typography>
-            DATE
-          </Typography>
-          <Typography>
-            THING
-          </Typography>
-          <Typography>
-            WEATHER
-          </Typography>
-          <Typography>
-            WOW
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card variant="outlined" className={classes.card}>
-        <CardContent>
-          <Typography>
-            DATE
-          </Typography>
-          <Typography>
-            THING
-          </Typography>
-          <Typography>
-            WEATHER
-          </Typography>
-          <Typography>
-            WOW
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card variant="outlined" className={classes.card}>
-        <CardContent>
-          <Typography>
-            DATE
-          </Typography>
-          <Typography>
-            THING
-          </Typography>
-          <Typography>
-            WEATHER
-          </Typography>
-          <Typography>
-            WOW
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card variant="outlined" className={classes.card}>
-        <CardContent>
-          <Typography>
-            DATE
-          </Typography>
-          <Typography>
-            THING
-          </Typography>
-          <Typography>
-            WEATHER
-          </Typography>
-          <Typography>
-            WOW
-          </Typography>
-        </CardContent>
-      </Card>
-
+          </CardContent>
+        </Card>
+      ))}
     </Paper>
 
   )

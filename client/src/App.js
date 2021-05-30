@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import API from './utils/API';
 import './App.css';
 import TopBar from './components/topbar';
 import SearchBar from './components/searchbar';
@@ -13,6 +14,15 @@ function App() {
   const [cityList, setCityList] = useLocalStorage('cityList', []);
   const [city, setCity] = useState(cityList[0] ? cityList[0] : "");
   const inputRef = useRef("");
+
+  useEffect(() => {
+    loadWeather(city);
+  }, [city]);
+
+  const loadWeather = async city => {
+    let data = await API.getWeather(city);
+    console.log(data);  
+  }
 
   const handleSubmit = event => {
     event.preventDefault();

@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import API from '../utils/API';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Card, CardContent, Typography } from '@material-ui/core';
 
@@ -21,14 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ForecastWeather(props) {
 
-  const classes = useStyles();
-  useEffect(() => {
-    loadForecast(props.city);
-  }, [props.city]);
-
-  const loadForecast = city => {
-    console.log(API.getForecastWeather(city));
-  }
+  const classes = useStyles(); 
 
   return (
     <Paper className={classes.cardContainer}>

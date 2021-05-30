@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import API from '../utils/API';
+import React from 'react';
 import { Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -17,13 +16,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CurrentWeather(props) {
 
   const classes = useStyles();
-  useEffect(() => {
-    loadCurrent(props.city);
-  }, [props.city]);
-
-  const loadCurrent = city => {
-    console.log(API.getCurrentWeather(city));
-  }
 
   return (
     <div>

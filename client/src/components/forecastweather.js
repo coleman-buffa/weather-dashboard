@@ -18,11 +18,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ForecastWeather({ forecast }) {
+export default function ForecastWeather({ forecast }) { 
 
   const classes = useStyles();
-
-  console.log(forecast);
 
   return (
     <Paper className={classes.cardContainer}>

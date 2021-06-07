@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const dotenv = require("dotenv");
 const axios = require("axios");
+const moment = require("moment");
 
 dotenv.config();
 
@@ -18,11 +19,16 @@ router.get("/weather/:city", (req, res) => {
       let lat = response.data.coord.lat;
       let lon = response.data.coord.lon;
       URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly&appid=${API_KEY}`;
+      console.log(URL);
       axios({
         method: 'GET',
         url: URL
       })
         .then(response => {
+          response.data.daily.map(item => {
+            let timeStamp = moment.unix(item.dt).format("MM/DD/YYYY");
+            item.dt = timeStamp;
+          })
           res.json(response.data);
         })
     })

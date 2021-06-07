@@ -22,10 +22,12 @@ export default function ForecastWeather({ forecast }) {
 
   const classes = useStyles();
 
+  console.log(forecast);
+
   return (
     <Paper className={classes.cardContainer}>
       {forecast.map((item) => (
-        <Card variant="outlined" className={classes.card}>
+        <Card variant="outlined" className={classes.card} key={item.dt}>
           <CardContent>
             <Typography>
               {item.dt}

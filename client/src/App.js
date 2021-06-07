@@ -23,7 +23,6 @@ function App() {
 
   const loadWeather = async city => {
     let data = await API.getWeather(city);
-    console.log(data);
     setWeather(data.data.current);
     let forecast = [];
     for (let i = 1; i < 6; i++){
@@ -66,6 +65,7 @@ function App() {
           <Grid item xs={12} sm={8}>
             <CurrentWeather
               weather={weather}
+              city={city}
             />
             <ForecastWeather
               forecast={forecast}

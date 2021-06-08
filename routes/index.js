@@ -28,6 +28,10 @@ router.get("/weather/:city", (req, res) => {
           response.data.daily.map(item => {
             let timeStamp = moment.unix(item.dt).format("MM/DD/YYYY");
             item.dt = timeStamp;
+
+            let iconURL = `http://openweathermap.org/img/wn/${item.weather[0].icon}.png`;
+            item.weather[0].iconURL = iconURL;
+            console.log(item.weather[0].iconURL);
           })
           res.json(response.data);
         })

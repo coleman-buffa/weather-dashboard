@@ -1,48 +1,49 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Card, CardContent, Typography } from '@material-ui/core';
+import { Paper, Card, CardContent, Typography, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'space-between',
+    justifyContent: 'center',
     '& > *': {
       margin: theme.spacing(1),
     },
-    card: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }
   },
+  card: {
+    display: 'flex',
+    flexDirection: 'column;',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    alignItems: 'space-between',
+    alignContent: 'center',
+  }
 }));
 
-export default function ForecastWeather({ forecast }) { 
+export default function ForecastWeather({ forecast }) {
 
   const classes = useStyles();
 
   return (
-    <Paper className={classes.cardContainer}>
-      {forecast.map((item) => (
-        <Card variant="outlined" className={classes.card} key={item.dt}>
-          <CardContent>
-            <Typography>
-              {item.dt}
-            </Typography>
-            <Typography>
-              {item.temp.max}
-            </Typography>
-            <Typography>
-              {item.temp.min}
-          </Typography>
-            <Typography>
-              {item.weather[0].description}
-          </Typography>
-          </CardContent>
-        </Card>
-      ))}
+    <Paper>
+      <Grid container className={classes.cardContainer}>
+        {forecast.map((item) => (
+          <Card variant="outlined" className={classes.card} key={item.dt}>
+            <CardContent>
+              <Typography align="center">
+                {item.dt} 
+              </Typography>
+              <img src={item.weather[0].iconURL}/>               
+              <Typography variant="caption">
+                Low: {item.temp.min}
+              </Typography>
+              <Typography variant="caption">
+                Max: {item.temp.max}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </Grid>
     </Paper>
-
   )
 }

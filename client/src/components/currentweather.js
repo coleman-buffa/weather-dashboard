@@ -21,9 +21,9 @@ export default function CurrentWeather(props) {
     <div>
       <Paper className={classes.root}>
         <Typography>Current Weather in {props.city}:</Typography>
-        <Typography variant="caption">Temperature: {props.weather.feels_like}</Typography>
-        <Typography variant="caption">Humidity: {props.weather.humidity}</Typography>
-        <Typography variant="caption">Wind Speed: {props.weather.wind_speed}</Typography>
+        <Typography variant="caption">Temperature: {props.weather.feels_like}&deg;F</Typography>
+        <Typography variant="caption">Humidity: {props.weather.humidity}%</Typography>
+        <Typography variant="caption">Wind Speed: {props.weather.wind_speed} mph</Typography>
         <Typography variant="caption">UV Index: {props.weather.uvi}</Typography>
       </Paper>
     </div>

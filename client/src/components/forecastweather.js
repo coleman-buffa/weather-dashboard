@@ -10,14 +10,18 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-  card: {
+  cardContent: {
     display: 'flex',
     flexDirection: 'column;',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignItems: 'space-between',
     alignContent: 'center',
-  }
+  },
+  img: {
+    height: '50%',
+    width: '50%',
+  },
 }));
 
 export default function ForecastWeather({ forecast }) {
@@ -28,17 +32,17 @@ export default function ForecastWeather({ forecast }) {
     <Paper>
       <Grid container className={classes.cardContainer}>
         {forecast.map((item) => (
-          <Card variant="outlined" className={classes.card} key={item.dt}>
-            <CardContent>
+          <Card variant="outlined" key={item.dt}>
+            <CardContent className={classes.cardContent}>
               <Typography align="center">
-                {item.dt} 
+                {item.dt}
               </Typography>
-              <img src={item.weather[0].iconURL} alt={item.weather[0].main}/>               
+              <img className={classes.img} src={item.weather[0].iconURL} alt={item.weather[0].main} />
               <Typography variant="caption">
-                Low: {item.temp.min}
+                Low: {item.temp.min}&deg;F
               </Typography>
               <Typography variant="caption">
-                Max: {item.temp.max}
+                Max: {item.temp.max}&deg;F
               </Typography>
             </CardContent>
           </Card>

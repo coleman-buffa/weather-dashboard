@@ -24,7 +24,7 @@ export default function SearchBar(props) {
         label="City Search"
         variant="filled"
         type="search"
-        fullWidth="true"
+        fullWidth="True"
         inputRef={props.inputRef}
         InputProps={{
           endAdornment: (

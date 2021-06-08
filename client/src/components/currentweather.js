@@ -6,9 +6,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    margin: '8px 0px',
     '& > *': {
       margin: theme.spacing(1),
-
     },
   },
 }));
@@ -26,7 +26,6 @@ export default function CurrentWeather(props) {
         <Typography variant="caption">Wind Speed: {props.weather.wind_speed}</Typography>
         <Typography variant="caption">UV Index: {props.weather.uvi}</Typography>
       </Paper>
-
     </div>
   )
 }

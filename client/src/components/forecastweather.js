@@ -33,7 +33,7 @@ export default function ForecastWeather({ forecast }) {
               <Typography align="center">
                 {item.dt} 
               </Typography>
-              <img src={item.weather[0].iconURL}/>               
+              <img src={item.weather[0].iconURL} alt={item.weather[0].main}/>               
               <Typography variant="caption">
                 Low: {item.temp.min}
               </Typography>

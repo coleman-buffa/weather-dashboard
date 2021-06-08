@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import API from './utils/API';
-import './App.css';
 import TopBar from './components/topbar';
 import SearchBar from './components/searchbar';
 import CityList from './components/citylist';

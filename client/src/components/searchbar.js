@@ -8,9 +8,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
     },
   },
+
 }));
 
 export default function SearchBar(props) {
@@ -24,6 +24,7 @@ export default function SearchBar(props) {
         label="City Search"
         variant="filled"
         type="search"
+        fullWidth="true"
         inputRef={props.inputRef}
         InputProps={{
           endAdornment: (
